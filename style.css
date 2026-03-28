@@ -1,4 +1,4 @@
-/* ====== Шрифты ====== */
+/* ===== Шрифты ===== */
 @import url('https://fonts.googleapis.com/css2?family=Pobeda&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;500;700&display=swap');
 
@@ -6,24 +6,24 @@ body {
   margin: 0;
   font-family: 'Helvetica Neue', sans-serif;
   color: white;
-  background: url('images/background.jpg') no-repeat center center/cover;
+  /* Фон по умолчанию для ПК */
+  background: url('https://i.pinimg.com/736x/62/76/34/627634aab8908a7eaa90dce0a11d257d.jpg') no-repeat center center/cover;
   overflow-x: hidden;
 }
 
 .glass {
   backdrop-filter: blur(15px);
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.7);
   min-height: 100vh;
 }
 
-h1,h2,p { text-shadow:0 2px 15px rgba(0,0,0,0.8); margin:0; }
-
-/* ====== Баннер ====== */
+/* ===== Баннер ===== */
 .banner {
   position: relative;
   width: 100%;
-  height: 60vh;
-  background: url('images/banner.jpg') center/cover no-repeat;
+  height: calc(60vh + 50px);
+  /* Баннер сверху */
+  background: url('https://i.pinimg.com/1200x/74/86/1d/74861db5d76e756c6280e234c40cce77.jpg') center/cover no-repeat;
   display:flex;
   flex-direction: column;
   justify-content:center;
@@ -34,63 +34,68 @@ h1,h2,p { text-shadow:0 2px 15px rgba(0,0,0,0.8); margin:0; }
 .banner h1 {
   font-family: 'Pobeda', serif;
   font-size: 80px;
-  margin-bottom:15px;
+  margin-bottom:0;
+  text-shadow:0 2px 10px rgba(0,0,0,0.7);
 }
 
-.banner .contacts {
+/* Контакты баннера */
+.banner-contacts {
   position:absolute;
   bottom:20px;
   right:20px;
-  text-align:right;
+  display:flex;
+  flex-direction: column;
+  gap:8px;
 }
 
-.banner .contacts a {
-  display:block;
-  margin:3px 0;
+.banner-contacts a {
+  color:white;
+  text-decoration:none;
   font-weight:500;
+  display:flex;
+  align-items:center;
+  gap:6px;
 }
 
-.banner .lang-switch {
+.banner-contacts a:hover { opacity:0.8; }
+
+/* Языки */
+.lang-switch {
   position:absolute;
   top:20px;
   right:20px;
 }
 
-.banner .lang-switch button {
+.lang-switch button {
   margin-left:8px;
-  padding:8px 14px;
+  padding:6px 12px;
   font-weight:500;
   background: rgba(255,255,255,0.1);
   border:1px solid rgba(255,255,255,0.3);
   border-radius:5px;
   cursor:pointer;
   color:white;
-  transition:0.3s;
 }
 
-.banner .lang-switch button:hover { background: rgba(255,255,255,0.3); }
+.lang-switch button:hover { background: rgba(255,255,255,0.3); }
 
-/* ====== Контент ====== */
-.container { padding:60px 40px; max-width:1200px; margin:auto; }
-.title { font-size:48px; font-weight:700; margin-bottom:10px; }
-.description { font-size:18px; margin-bottom:40px; max-width:700px; }
-
-/* ====== Видео-секции ====== */
-.media-section { margin-bottom:60px; }
-.media-section h2 {
-  font-size:36px;
-  font-weight:700;
-  margin-bottom:20px;
-  border-left:4px solid #fff;
-  padding-left:12px;
+/* ===== Контент ===== */
+.container {
+  padding:40px 20px;
+  max-width:1200px;
+  margin:auto;
+  margin-top:-50px;
 }
 
+h2 { margin-bottom:15px; text-shadow:0 2px 10px rgba(0,0,0,0.7); }
+
+/* ===== Видео-секции ===== */
 .media-scroll {
   display:flex;
   gap:25px;
   overflow-x:auto;
-  padding-bottom:10px;
   scroll-behavior:smooth;
+  padding-bottom:10px;
 }
 
 .media-scroll::-webkit-scrollbar { height:10px; }
@@ -98,30 +103,26 @@ h1,h2,p { text-shadow:0 2px 15px rgba(0,0,0,0.8); margin:0; }
 
 .media-item {
   flex:0 0 auto;
-  width:640px;   /* 720p-ish */
-  height:360px;
-  background:#111;
+  width:640px;  
+  height:360px;  
   border-radius:12px;
   overflow:hidden;
-  box-shadow:0 4px 20px rgba(0,0,0,0.5);
-  position:relative;
+  box-shadow:0 4px 15px rgba(0,0,0,0.5);
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .media-item iframe { width:100%; height:100%; border:none; }
 
-.media-item:hover {
-  transform:translateY(-5px);
-  box-shadow:0 10px 30px rgba(0,0,0,0.7);
-}
+.media-item:hover { transform:translateY(-5px); box-shadow:0 8px 25px rgba(0,0,0,0.7); }
 
-/* ====== Мобильная версия ====== */
-@media (max-width:768px) {
-  .banner { height:40vh; }
+/* ===== Мобильная версия ===== */
+@media (max-width:768px){
+  body {
+    /* фон для телефона */
+    background: url('https://i.pinimg.com/736x/42/f3/27/42f327d49db6f524859fd0d69f881e7b.jpg') no-repeat center center/cover;
+  }
+  .banner { height:50vh; }
   .banner h1 { font-size:40px; }
-  .container { padding:20px; }
-  .title { font-size:28px; }
-  .description { font-size:14px; }
-  .media-scroll { gap:15px; }
+  .container { padding:20px; margin-top:-30px; }
   .media-item { width:480px; height:270px; }
 }

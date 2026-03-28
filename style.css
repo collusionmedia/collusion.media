@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Портфолио</title>
+  
+  <!-- Подключение шрифта Inter через Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ====== ОБЩИЕ ====== */
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: white;
+      background: url('images/background.jpg') no-repeat center center/cover; /* фон */
+    }
+
+    .glass {
+      backdrop-filter: blur(15px);
+      background: rgba(0,0,0,0.6);
+      min-height: 100vh;
+    }
+
+    h1, h2, p {
+      text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+    }
+
+    /* ====== БАННЕР ====== */
+    .banner {
+      position: relative;
+      width: 100%;
+      height: 60vh;
+      background: url('images/banner.jpg') center/cover no-repeat; /* баннер */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contacts {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      text-align: right;
+    }
+
+    .contacts a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      margin: 5px 0;
+    }
+
+    .lang-switch {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .lang-switch button {
+      margin-left: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    /* ====== КОНТЕНТ ====== */
+    .container {
+      padding: 60px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .title {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      max-width: 600px;
+      margin-bottom: 40px;
+      font-size: 18px;
+    }
+
+    /* ====== ПОРТФОЛИО С ВИДЕО/КЛИПАМИ ====== */
+    .media-section {
+      margin-bottom: 60px;
+    }
+
+    .media-section h2 {
+      margin-bottom: 20px;
+    }
+
+    .media-scroll {
+      display: flex;
+      gap: 15px;
+      overflow-x: auto; /* горизонтальный скролл */
+      padding-bottom: 10px;
+      scrollbar-width: thin; /* для Firefox */
+    }
+
+    .media-scroll::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .media-scroll::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+
+    .media-item {
+      flex: 0 0 auto; /* фиксированная ширина, чтобы не сжималось */
+      width: 250px;
+      height: 140px;
+      background: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+      position: relative;
+    }
+
+    .media-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ====== МОБИЛЬНАЯ ВЕРСИЯ ====== */
+    @media (max-width: 768px) {
+      .banner { height: 40vh; }
+      .container { padding: 20px; }
+      .title { font-size: 28px; }
+      .description { font-size: 14px; }
+      .contacts { right: 10px; bottom: 10px; font-size: 12px; }
+      .lang-switch { top: 10px; right: 10px; }
+      .lang-switch button { padding: 3px 6px; font-size: 12px; }
+      .media-item { width: 180px; height: 100px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glass">
+
+    <!-- Баннер -->
+    <div class="banner">
+      <h1>Привет, это баннер</h1>
+      <div class="contacts">
+        <a href="#">Email</a>
+        <a href="#">Телефон</a>
+      </div>
+      <div class="lang-switch">
+        <button>RU</button>
+        <button>EN</button>
+      </div>
+    </div>
+
+    <!-- Контент -->
+    <div class="container">
+
+      <h2 class="title">Мои работы</h2>
+      <p class="description">Здесь будут видео и клипы.</p>
+
+      <!-- Пример секции с горизонтальным скроллом -->
+      <div class="media-section">
+        <h2>Клипы 1</h2>
+        <div class="media-scroll">
+          <!-- каждый .media-item = отдельный видео-файл или картинка -->
+          <div class="media-item">
+            <video src="media/video1.mp4" controls></video>
+          </div>
+          <div class="media-item">
+            <video src="media/video2.mp4" controls></video>
+          </div>
+          <div class="media-item">
+            <video src="media/video3.mp4" controls></video>
+          </div>
+          <!-- добавляй сколько угодно -->
+        </div>
+      </div>
+
+      <!-- Ещё одна секция -->
+      <div class="media-section">
+        <h2>Клипы 2</h2>
+        <div class="media-scroll">
+          <div class="media-item">
+            <video src="media/video4.mp4" controls></video>
+          </div>
+          <div class="media-item">
+            <video src="media/video5.mp4" controls></video>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</body>
+</html>

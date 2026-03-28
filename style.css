@@ -1,200 +1,127 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Портфолио</title>
-  
-  <!-- Подключение шрифта Inter через Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+/* ====== Шрифты ====== */
+@import url('https://fonts.googleapis.com/css2?family=Pobeda&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;500;700&display=swap');
 
-  <style>
-    /* ====== ОБЩИЕ ====== */
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      color: white;
-      background: url('images/background.jpg') no-repeat center center/cover; /* фон */
-    }
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', sans-serif;
+  color: white;
+  background: url('images/background.jpg') no-repeat center center/cover;
+  overflow-x: hidden;
+}
 
-    .glass {
-      backdrop-filter: blur(15px);
-      background: rgba(0,0,0,0.6);
-      min-height: 100vh;
-    }
+.glass {
+  backdrop-filter: blur(15px);
+  background: rgba(0,0,0,0.6);
+  min-height: 100vh;
+}
 
-    h1, h2, p {
-      text-shadow: 0 2px 10px rgba(0,0,0,0.7);
-    }
+h1,h2,p { text-shadow:0 2px 15px rgba(0,0,0,0.8); margin:0; }
 
-    /* ====== БАННЕР ====== */
-    .banner {
-      position: relative;
-      width: 100%;
-      height: 60vh;
-      background: url('images/banner.jpg') center/cover no-repeat; /* баннер */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+/* ====== Баннер ====== */
+.banner {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  background: url('images/banner.jpg') center/cover no-repeat;
+  display:flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
 
-    .contacts {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      text-align: right;
-    }
+.banner h1 {
+  font-family: 'Pobeda', serif;
+  font-size: 80px;
+  margin-bottom:15px;
+}
 
-    .contacts a {
-      display: block;
-      color: white;
-      text-decoration: none;
-      margin: 5px 0;
-    }
+.banner .contacts {
+  position:absolute;
+  bottom:20px;
+  right:20px;
+  text-align:right;
+}
 
-    .lang-switch {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-    }
+.banner .contacts a {
+  display:block;
+  margin:3px 0;
+  font-weight:500;
+}
 
-    .lang-switch button {
-      margin-left: 5px;
-      padding: 5px 10px;
-      cursor: pointer;
-    }
+.banner .lang-switch {
+  position:absolute;
+  top:20px;
+  right:20px;
+}
 
-    /* ====== КОНТЕНТ ====== */
-    .container {
-      padding: 60px;
-      max-width: 1200px;
-      margin: auto;
-    }
+.banner .lang-switch button {
+  margin-left:8px;
+  padding:8px 14px;
+  font-weight:500;
+  background: rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.3);
+  border-radius:5px;
+  cursor:pointer;
+  color:white;
+  transition:0.3s;
+}
 
-    .title {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
+.banner .lang-switch button:hover { background: rgba(255,255,255,0.3); }
 
-    .description {
-      max-width: 600px;
-      margin-bottom: 40px;
-      font-size: 18px;
-    }
+/* ====== Контент ====== */
+.container { padding:60px 40px; max-width:1200px; margin:auto; }
+.title { font-size:48px; font-weight:700; margin-bottom:10px; }
+.description { font-size:18px; margin-bottom:40px; max-width:700px; }
 
-    /* ====== ПОРТФОЛИО С ВИДЕО/КЛИПАМИ ====== */
-    .media-section {
-      margin-bottom: 60px;
-    }
+/* ====== Видео-секции ====== */
+.media-section { margin-bottom:60px; }
+.media-section h2 {
+  font-size:36px;
+  font-weight:700;
+  margin-bottom:20px;
+  border-left:4px solid #fff;
+  padding-left:12px;
+}
 
-    .media-section h2 {
-      margin-bottom: 20px;
-    }
+.media-scroll {
+  display:flex;
+  gap:25px;
+  overflow-x:auto;
+  padding-bottom:10px;
+  scroll-behavior:smooth;
+}
 
-    .media-scroll {
-      display: flex;
-      gap: 15px;
-      overflow-x: auto; /* горизонтальный скролл */
-      padding-bottom: 10px;
-      scrollbar-width: thin; /* для Firefox */
-    }
+.media-scroll::-webkit-scrollbar { height:10px; }
+.media-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius:5px; }
 
-    .media-scroll::-webkit-scrollbar {
-      height: 8px;
-    }
+.media-item {
+  flex:0 0 auto;
+  width:640px;   /* 720p-ish */
+  height:360px;
+  background:#111;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 4px 20px rgba(0,0,0,0.5);
+  position:relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
 
-    .media-scroll::-webkit-scrollbar-thumb {
-      background: #888;
-      border-radius: 4px;
-    }
+.media-item iframe { width:100%; height:100%; border:none; }
 
-    .media-item {
-      flex: 0 0 auto; /* фиксированная ширина, чтобы не сжималось */
-      width: 250px;
-      height: 140px;
-      background: #222;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 14px;
-      position: relative;
-    }
+.media-item:hover {
+  transform:translateY(-5px);
+  box-shadow:0 10px 30px rgba(0,0,0,0.7);
+}
 
-    .media-item video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* ====== МОБИЛЬНАЯ ВЕРСИЯ ====== */
-    @media (max-width: 768px) {
-      .banner { height: 40vh; }
-      .container { padding: 20px; }
-      .title { font-size: 28px; }
-      .description { font-size: 14px; }
-      .contacts { right: 10px; bottom: 10px; font-size: 12px; }
-      .lang-switch { top: 10px; right: 10px; }
-      .lang-switch button { padding: 3px 6px; font-size: 12px; }
-      .media-item { width: 180px; height: 100px; }
-    }
-  </style>
-</head>
-<body>
-  <div class="glass">
-
-    <!-- Баннер -->
-    <div class="banner">
-      <h1>Привет, это баннер</h1>
-      <div class="contacts">
-        <a href="#">Email</a>
-        <a href="#">Телефон</a>
-      </div>
-      <div class="lang-switch">
-        <button>RU</button>
-        <button>EN</button>
-      </div>
-    </div>
-
-    <!-- Контент -->
-    <div class="container">
-
-      <h2 class="title">Мои работы</h2>
-      <p class="description">Здесь будут видео и клипы.</p>
-
-      <!-- Пример секции с горизонтальным скроллом -->
-      <div class="media-section">
-        <h2>Клипы 1</h2>
-        <div class="media-scroll">
-          <!-- каждый .media-item = отдельный видео-файл или картинка -->
-          <div class="media-item">
-            <video src="media/video1.mp4" controls></video>
-          </div>
-          <div class="media-item">
-            <video src="media/video2.mp4" controls></video>
-          </div>
-          <div class="media-item">
-            <video src="media/video3.mp4" controls></video>
-          </div>
-          <!-- добавляй сколько угодно -->
-        </div>
-      </div>
-
-      <!-- Ещё одна секция -->
-      <div class="media-section">
-        <h2>Клипы 2</h2>
-        <div class="media-scroll">
-          <div class="media-item">
-            <video src="media/video4.mp4" controls></video>
-          </div>
-          <div class="media-item">
-            <video src="media/video5.mp4" controls></video>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</body>
-</html>
+/* ====== Мобильная версия ====== */
+@media (max-width:768px) {
+  .banner { height:40vh; }
+  .banner h1 { font-size:40px; }
+  .container { padding:20px; }
+  .title { font-size:28px; }
+  .description { font-size:14px; }
+  .media-scroll { gap:15px; }
+  .media-item { width:480px; height:270px; }
+}

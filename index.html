@@ -1,130 +1,88 @@
-/* ====== ОБЩИЕ ====== */
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  color: white;
-  background: url('your-background.jpg') no-repeat center center/cover;
-}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Портфолио</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="glass">
 
-.glass {
-  backdrop-filter: blur(15px);
-  background: rgba(0, 0, 0, 0.6);
-  min-height: 100vh;
-}
+    <!-- Баннер -->
+    <div class="banner">
+      <h1 id="banner-title">Портфолио видео</h1>
+      <div class="contacts">
+        <a href="#" id="contact-email">Email</a>
+        <a href="#" id="contact-phone">Телефон</a>
+      </div>
+      <div class="lang-switch">
+        <button data-lang="ru">RU</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="de">DE</button>
+        <button data-lang="uk">UK</button>
+        <button data-lang="pl">PL</button>
+      </div>
+    </div>
 
-h1, h2, p {
-  text-shadow: 0 2px 10px rgba(0,0,0,0.7);
-}
+    <div class="container">
+      <h2 class="title" id="main-title">Мои работы</h2>
+      <p class="description" id="main-desc">Горизонтальный скролл видео для каждого направления.</p>
 
-/* ====== БАННЕР ====== */
-.banner {
-  position: relative;
-  width: 100%;
-  height: 60vh;
-}
+      <!-- Коммерция -->
+      <div class="media-section">
+        <h2 id="section1-title">Коммерция</h2>
+        <div class="media-scroll">
+          <div class="media-item">
+            <iframe src="https://www.youtube.com/embed/E1SuZz94gNg?rel=0&vq=hd720" allowfullscreen></iframe>
+          </div>
+          <div class="media-item">
+            <iframe src="https://www.youtube.com/embed/bmmAw1HqLoU?rel=0&vq=hd720" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
 
-.banner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+      <!-- Музыкальные клипы -->
+      <div class="media-section">
+        <h2 id="section2-title">Музыкальные клипы</h2>
+        <div class="media-scroll">
+          <div class="media-item">
+            <iframe src="https://www.youtube.com/embed/DXoOqDf8o3k?rel=0&vq=hd720" allowfullscreen></iframe>
+          </div>
+          <div class="media-item">
+            <iframe src="https://www.youtube.com/embed/oqls_8L9R28?rel=0&vq=hd720" allowfullscreen></iframe>
+          </div>
+          <div class="media-item">
+            <iframe src="https://www.youtube.com/embed/xnFAk-6Mt84?rel=0&vq=hd720" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
 
-/* ====== КОНТАКТЫ ====== */
-.contacts {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  text-align: right;
-}
+    </div>
 
-.contacts a {
-  display: block;
-  color: white;
-  text-decoration: none;
-  margin: 5px 0;
-}
+  </div>
 
-/* ====== ЯЗЫКИ ====== */
-.lang-switch {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
+  <script>
+    const texts = {
+      ru: { bannerTitle:"Портфолио видео", contactEmail:"Email", contactPhone:"Телефон", mainTitle:"Мои работы", mainDesc:"Горизонтальный скролл видео для каждого направления.", section1Title:"Коммерция", section2Title:"Музыкальные клипы" },
+      en: { bannerTitle:"Video Portfolio", contactEmail:"Email", contactPhone:"Phone", mainTitle:"My Works", mainDesc:"Horizontal scroll of videos for each category.", section1Title:"Commercials", section2Title:"Music Clips" },
+      de: { bannerTitle:"Videoporfolio", contactEmail:"Email", contactPhone:"Telefon", mainTitle:"Meine Arbeiten", mainDesc:"Horizontales Scrollen der Videos für jede Kategorie.", section1Title:"Werbung", section2Title:"Musikclips" },
+      uk: { bannerTitle:"Портфоліо відео", contactEmail:"Електронна пошта", contactPhone:"Телефон", mainTitle:"Мої роботи", mainDesc:"Горизонтальний скрол відео для кожної категорії.", section1Title:"Комерція", section2Title:"Музичні кліпи" },
+      pl: { bannerTitle:"Portfolio wideo", contactEmail:"Email", contactPhone:"Telefon", mainTitle:"Moje prace", mainDesc:"Poziomy przewijanie filmów dla każdej kategorii.", section1Title:"Reklamy", section2Title:"Klipy muzyczne" }
+    };
 
-.lang-switch button {
-  margin-left: 5px;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-/* ====== КОНТЕНТ ====== */
-.container {
-  padding: 60px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.title {
-  font-size: 48px;
-}
-
-.description {
-  max-width: 600px;
-  margin-bottom: 60px;
-  font-size: 18px;
-}
-
-/* ====== ПОРТФОЛИО ====== */
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-}
-
-.portfolio-item {
-  height: 180px;
-  background: #222;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ====== 📱 МОБИЛЬНАЯ ВЕРСИЯ ====== */
-@media (max-width: 768px) {
-
-  .banner {
-    height: 40vh;
-  }
-
-  .container {
-    padding: 20px;
-  }
-
-  .title {
-    font-size: 28px;
-  }
-
-  .description {
-    font-size: 14px;
-  }
-
-  .portfolio-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .contacts {
-    right: 10px;
-    bottom: 10px;
-    font-size: 12px;
-  }
-
-  .lang-switch {
-    top: 10px;
-    right: 10px;
-  }
-
-  .lang-switch button {
-    padding: 3px 6px;
-    font-size: 12px;
-  }
-}
+    document.querySelectorAll('.lang-switch button').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const lang=btn.dataset.lang;
+        document.getElementById('banner-title').textContent = texts[lang].bannerTitle;
+        document.getElementById('contact-email').textContent = texts[lang].contactEmail;
+        document.getElementById('contact-phone').textContent = texts[lang].contactPhone;
+        document.getElementById('main-title').textContent = texts[lang].mainTitle;
+        document.getElementById('main-desc').textContent = texts[lang].mainDesc;
+        document.getElementById('section1-title').textContent = texts[lang].section1Title;
+        document.getElementById('section2-title').textContent = texts[lang].section2Title;
+      });
+    });
+  </script>
+</body>
+</html>

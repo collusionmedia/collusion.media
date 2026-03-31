@@ -1,88 +1,80 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Портфолио</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collusion Media | Video Production</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="glass">
 
-    <!-- Баннер -->
-    <div class="banner">
-      <h1 id="banner-title">Портфолио видео</h1>
-      <div class="contacts">
-        <a href="#" id="contact-email">Email</a>
-        <a href="#" id="contact-phone">Телефон</a>
-      </div>
-      <div class="lang-switch">
-        <button data-lang="ru">RU</button>
-        <button data-lang="en">EN</button>
-        <button data-lang="de">DE</button>
-        <button data-lang="uk">UK</button>
-        <button data-lang="pl">PL</button>
-      </div>
-    </div>
-
-    <div class="container">
-      <h2 class="title" id="main-title">Мои работы</h2>
-      <p class="description" id="main-desc">Горизонтальный скролл видео для каждого направления.</p>
-
-      <!-- Коммерция -->
-      <div class="media-section">
-        <h2 id="section1-title">Коммерция</h2>
-        <div class="media-scroll">
-          <div class="media-item">
-            <iframe src="https://www.youtube.com/embed/E1SuZz94gNg?rel=0&vq=hd720" allowfullscreen></iframe>
-          </div>
-          <div class="media-item">
-            <iframe src="https://www.youtube.com/embed/bmmAw1HqLoU?rel=0&vq=hd720" allowfullscreen></iframe>
-          </div>
+    <header class="banner">
+        <div class="banner-top">
+            <select id="lang-switch" class="lang-switch">
+                <option value="ru">RU</option>
+                <option value="en">EN</option>
+                <option value="de">DE</option>
+                <option value="pl">PL</option>
+                <option value="uk">UK</option>
+            </select>
         </div>
-      </div>
+        
+        <h1 class="main-title" data-i18n="portfolioTitle">PORTFOLIO</h1>
 
-      <!-- Музыкальные клипы -->
-      <div class="media-section">
-        <h2 id="section2-title">Музыкальные клипы</h2>
-        <div class="media-scroll">
-          <div class="media-item">
-            <iframe src="https://www.youtube.com/embed/DXoOqDf8o3k?rel=0&vq=hd720" allowfullscreen></iframe>
-          </div>
-          <div class="media-item">
-            <iframe src="https://www.youtube.com/embed/oqls_8L9R28?rel=0&vq=hd720" allowfullscreen></iframe>
-          </div>
-          <div class="media-item">
-            <iframe src="https://www.youtube.com/embed/xnFAk-6Mt84?rel=0&vq=hd720" allowfullscreen></iframe>
-          </div>
+        <div class="banner-bottom">
+            <div class="contact-links">
+                <a href="#" id="link-instagram" target="_blank" class="contact-icon" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" id="link-phone" class="contact-icon" title="Copy Phone">
+                    <i class="fas fa-phone"></i>
+                </a>
+                <a href="#" id="link-email" class="contact-icon" title="Email Us">
+                    <i class="far fa-envelope"></i>
+                </a>
+            </div>
+            <a href="admin.html" class="admin-link"><i class="fas fa-cog"></i></a>
         </div>
-      </div>
+    </header>
 
-    </div>
+    <main class="content-wrapper glassmorphism">
+        
+        <section class="about-section">
+            <h2 data-i18n="aboutTitle">О Collusion Media</h2>
+            <p id="about-text" data-i18n="aboutText">
+                Новый видео продакшн, который работает над музыкальными, коммерческими и творческими проектами.
+            </p>
+        </section>
 
-  </div>
+        <section class="portfolio-category">
+            <h3 data-i18n="catCommercial">Коммерческие работы</h3>
+            <div class="video-row" id="row-commercial"></div>
+        </section>
 
-  <script>
-    const texts = {
-      ru: { bannerTitle:"Портфолио видео", contactEmail:"Email", contactPhone:"Телефон", mainTitle:"Мои работы", mainDesc:"Горизонтальный скролл видео для каждого направления.", section1Title:"Коммерция", section2Title:"Музыкальные клипы" },
-      en: { bannerTitle:"Video Portfolio", contactEmail:"Email", contactPhone:"Phone", mainTitle:"My Works", mainDesc:"Horizontal scroll of videos for each category.", section1Title:"Commercials", section2Title:"Music Clips" },
-      de: { bannerTitle:"Videoporfolio", contactEmail:"Email", contactPhone:"Telefon", mainTitle:"Meine Arbeiten", mainDesc:"Horizontales Scrollen der Videos für jede Kategorie.", section1Title:"Werbung", section2Title:"Musikclips" },
-      uk: { bannerTitle:"Портфоліо відео", contactEmail:"Електронна пошта", contactPhone:"Телефон", mainTitle:"Мої роботи", mainDesc:"Горизонтальний скрол відео для кожної категорії.", section1Title:"Комерція", section2Title:"Музичні кліпи" },
-      pl: { bannerTitle:"Portfolio wideo", contactEmail:"Email", contactPhone:"Telefon", mainTitle:"Moje prace", mainDesc:"Poziomy przewijanie filmów dla każdej kategorii.", section1Title:"Reklamy", section2Title:"Klipy muzyczne" }
-    };
+        <section class="portfolio-category">
+            <h3 data-i18n="catMusic">Музыкальные клипы</h3>
+            <div class="video-row" id="row-music"></div>
+        </section>
 
-    document.querySelectorAll('.lang-switch button').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        const lang=btn.dataset.lang;
-        document.getElementById('banner-title').textContent = texts[lang].bannerTitle;
-        document.getElementById('contact-email').textContent = texts[lang].contactEmail;
-        document.getElementById('contact-phone').textContent = texts[lang].contactPhone;
-        document.getElementById('main-title').textContent = texts[lang].mainTitle;
-        document.getElementById('main-desc').textContent = texts[lang].mainDesc;
-        document.getElementById('section1-title').textContent = texts[lang].section1Title;
-        document.getElementById('section2-title').textContent = texts[lang].section2Title;
-      });
-    });
-  </script>
+        <section class="portfolio-category">
+            <h3 data-i18n="catLifestyle">Лайфстайл</h3>
+            <div class="video-row" id="row-lifestyle"></div>
+        </section>
+
+        <section class="portfolio-category">
+            <h3 data-i18n="catArtists">Артисты</h3>
+            <div class="video-row" id="row-artists"></div>
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
 </body>
 </html>

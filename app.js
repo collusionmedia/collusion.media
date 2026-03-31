@@ -1,20 +1,19 @@
 // ==========================================
-// БАЗОВЫЕ НАСТРОЙКИ И ДАННЫЕ ПО УМОЛЧАНИЮ
+// 1. БАЗОВЫЕ ДАННЫЕ (БАЗА ДАННЫХ ПО УМОЛЧАНИЮ)
 // ==========================================
-
-// Если в localStorage (памяти браузера) ещё ничего нет, используем этот шаблон.
+// Если пользователь заходит впервые, сайт возьмет данные отсюда.
 const defaultData = {
     settings: {
         bgDesktop: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=2000",
         bgMobile: "https://images.unsplash.com/photo-1540655037529-dec98f5807ee?q=80&w=800",
         bannerBg: "https://images.unsplash.com/photo-1620121478247-ec786ceb24c3?q=80&w=2000",
-        instagram: "https://instagram.com",
-        phone: "+1234567890",
+        instagram: "https://instagram.com/collusion_media",
+        phone: "+79000000000",
         email: "hello@collusion.media"
     },
     translations: {
         ru: {
-            portfolioTitle: "ПОРТФОЛИО",
+            portfolioTitle: "PORTFOLIO",
             aboutTitle: "О Collusion Media",
             aboutText: "Новый видео продакшн, который работает над музыкальными, коммерческими и творческими проектами.",
             catCommercial: "Коммерческие работы",
@@ -32,7 +31,7 @@ const defaultData = {
             catArtists: "Artists"
         },
         uk: {
-            portfolioTitle: "ПОРТФОЛІО",
+            portfolioTitle: "PORTFOLIO",
             aboutTitle: "Про Collusion Media",
             aboutText: "Новий відеопродакшн, який працює над музичними, комерційними та творчими проєктами.",
             catCommercial: "Комерційні роботи",
@@ -60,15 +59,15 @@ const defaultData = {
         }
     },
     videos: {
-        // Сюда вписываем только ID видео из YouTube (то, что идет после v=)
-        commercial: ["dQw4w9WgXcQ", "3JZ_D3ELwOQ"], 
-        music: ["L_jWHffIx5E"],
+        // Сюда вставляй только ID видео (то, что в ссылке YouTube идет после v=)
+        commercial: ["dQw4w9WgXcQ"], 
+        music: ["3JZ_D3ELwOQ"],
         lifestyle: [],
         artists: []
     }
 };
 
-// Загружаем данные из LocalStorage или берём дефолтные
+// Загружаем данные из памяти браузера или используем дефолтные
 let siteData = JSON.parse(localStorage.getItem('collusionData'));
 if (!siteData) {
     siteData = defaultData;
@@ -76,104 +75,89 @@ if (!siteData) {
 }
 
 // ==========================================
-// ЛОГИКА МУЛЬТИЯЗЫЧНОСТИ
+// 2. СИСТЕМА ЯЗЫКОВ
 // ==========================================
 
-// Определяем язык пользователя
 let currentLang = localStorage.getItem('siteLang');
+
+// Автоопределение языка, если он не выбран вручную
 if (!currentLang) {
-    // navigator.language возвращает что-то вроде 'ru-RU' или 'en-US', берем первые 2 буквы
     const browserLang = navigator.language.slice(0, 2); 
     const supported = ['ru', 'en', 'de', 'pl', 'uk'];
     currentLang = supported.includes(browserLang) ? browserLang : 'en';
     localStorage.setItem('siteLang', currentLang);
 }
 
-// Устанавливаем select на нужный язык
-const langSwitch = document.getElementById('lang-switch');
-if(langSwitch) {
-    langSwitch.value = currentLang;
-    langSwitch.addEventListener('change', (e) => {
-        localStorage.setItem('siteLang', e.target.value);
-        window.location.reload(); // Перезагружаем страницу для применения перевода
-    });
-}
-
-// Функция для подстановки текста на страницу
+// Применение текстов на страницу
 function applyTranslations() {
-    const dict = siteData.translations[currentLang];
-    
-    // Ищем все элементы с атрибутом data-i18n и меняем их текст
+    const dict = siteData.translations[currentLang] || siteData.translations['en'];
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (dict[key]) {
-            el.innerText = dict[key];
-        }
+        if (dict[key]) el.innerText = dict[key];
     });
 }
 
 // ==========================================
-// ИНИЦИАЛИЗАЦИЯ И РЕНДЕР КОНТЕНТА
+// 3. ЗАПУСК И ОТРИСОВКА САЙТА
 // ==========================================
 
 function initSite() {
-    // 1. Применяем языки
-    applyTranslations();
-
-    // 2. Устанавливаем фоновые изображения через CSS-переменные
+    // Установка картинок фона
     document.documentElement.style.setProperty('--bg-desktop', `url('${siteData.settings.bgDesktop}')`);
     document.documentElement.style.setProperty('--bg-mobile', `url('${siteData.settings.bgMobile}')`);
     document.documentElement.style.setProperty('--banner-img', `url('${siteData.settings.bannerBg}')`);
 
-    // 3. Настраиваем ссылки в баннере
-    document.getElementById('link-instagram').href = siteData.settings.instagram;
-    document.getElementById('link-email').href = `mailto:${siteData.settings.email}`;
-    
-    // Копирование телефона по клику
-    document.getElementById('link-phone').addEventListener('click', (e) => {
-        e.preventDefault();
-        navigator.clipboard.writeText(siteData.settings.phone);
-        alert(`Телефон скопирован: ${siteData.settings.phone}`); // Простое уведомление
-    });
+    // Ссылки
+    const instLink = document.getElementById('link-instagram');
+    const emailLink = document.getElementById('link-email');
+    const phoneLink = document.getElementById('link-phone');
 
-    // 4. Рендерим видео-карточки
+    if(instLink) instLink.href = siteData.settings.instagram;
+    if(emailLink) emailLink.href = `mailto:${siteData.settings.email}`;
+    if(phoneLink) {
+        phoneLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigator.clipboard.writeText(siteData.settings.phone);
+            alert("Номер скопирован: " + siteData.settings.phone);
+        });
+    }
+
+    // Переключатель языков
+    const langSwitch = document.getElementById('lang-switch');
+    if(langSwitch) {
+        langSwitch.value = currentLang;
+        langSwitch.addEventListener('change', (e) => {
+            localStorage.setItem('siteLang', e.target.value);
+            window.location.reload();
+        });
+    }
+
+    applyTranslations();
+
+    // Отрисовка видео в категориях
     renderVideos('commercial', 'row-commercial');
     renderVideos('music', 'row-music');
     renderVideos('lifestyle', 'row-lifestyle');
     renderVideos('artists', 'row-artists');
 }
 
-// Функция для создания YouTube iframe карточек
 function renderVideos(categoryKey, containerId) {
     const container = document.getElementById(containerId);
     if(!container) return;
 
-    const videoIds = siteData.videos[categoryKey];
-    container.innerHTML = ''; // Очищаем контейнер
-
-    if(videoIds.length === 0) {
-        // Если видео нет, можно скрыть всю категорию
-        container.parentElement.style.display = 'none';
+    const vids = siteData.videos[categoryKey];
+    if(!vids || vids.length === 0) {
+        container.parentElement.style.display = 'none'; // Скрываем пустую категорию
         return;
     }
 
-    videoIds.forEach(id => {
-        const idTrimmed = id.trim();
-        if(!idTrimmed) return;
-
-        // Создаем карточку. modestbranding=1 и rel=0 убирают лишний брендинг YouTube
-        const card = document.createElement('div');
-        card.className = 'video-card';
-        card.innerHTML = `
-            <iframe 
-                src="https://www.youtube.com/embed/${idTrimmed}?rel=0&modestbranding=1" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
-        `;
-        container.appendChild(card);
-    });
+    container.innerHTML = vids.map(id => `
+        <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/${id}?rel=0&modestbranding=1" 
+                    allowfullscreen></iframe>
+        </div>
+    `).join('');
 }
 
-// Запускаем сборку сайта после загрузки DOM
+// Запуск при загрузке страницы
 document.addEventListener('DOMContentLoaded', initSite);

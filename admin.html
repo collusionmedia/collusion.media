@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Collusion Media</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body style="background: #050505;"> <div class="admin-container">
+        <h2>Настройки сайта (Admin Panel)</h2>
+        <p style="margin-bottom: 20px; color: #888;">Все изменения сохраняются в кэше браузера (localStorage).</p>
+        
+        <form id="admin-form">
+            <h3>Ссылки и контакты</h3>
+            <div class="admin-group">
+                <label>Instagram URL:</label>
+                <input type="text" id="adm-inst">
+            </div>
+            <div class="admin-group">
+                <label>Телефон:</label>
+                <input type="text" id="adm-phone">
+            </div>
+            <div class="admin-group">
+                <label>Email:</label>
+                <input type="text" id="adm-email">
+            </div>
+
+            <hr style="border-color: #333; margin: 30px 0;">
+
+            <h3>Оформление (Прямые ссылки на изображения)</h3>
+            <div class="admin-group">
+                <label>Фон баннера:</label>
+                <input type="text" id="adm-banner">
+            </div>
+            <div class="admin-group">
+                <label>Фон сайта (ПК):</label>
+                <input type="text" id="adm-bg-desktop">
+            </div>
+            <div class="admin-group">
+                <label>Фон сайта (Мобильный):</label>
+                <input type="text" id="adm-bg-mobile">
+            </div>
+
+            <hr style="border-color: #333; margin: 30px 0;">
+
+            <h3>Видео (YouTube ID через запятую)</h3>
+            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">
+                Пример: В ссылке https://youtube.com/watch?v=<b>dQw4w9WgXcQ</b>, ID это <b>dQw4w9WgXcQ</b>
+            </p>
+            <div class="admin-group">
+                <label>Коммерческие работы:</label>
+                <textarea id="adm-vid-comm" rows="3"></textarea>
+            </div>
+            <div class="admin-group">
+                <label>Музыкальные клипы:</label>
+                <textarea id="adm-vid-music" rows="3"></textarea>
+            </div>
+            <div class="admin-group">
+                <label>Лайфстайл:</label>
+                <textarea id="adm-vid-life" rows="3"></textarea>
+            </div>
+            <div class="admin-group">
+                <label>Артисты:</label>
+                <textarea id="adm-vid-art" rows="3"></textarea>
+            </div>
+
+            <button type="button" id="save-btn" class="admin-btn">Сохранить изменения</button>
+            <a href="index.html" class="admin-btn" style="text-decoration: none; margin-left: 10px;">Вернуться на сайт</a>
+        </form>
+    </div>
+
+    <script>
+        // Простейшая логика админки встроена прямо сюда для удобства
+        document.addEventListener('DOMContentLoaded', () => {
+            // Загружаем текущие данные (логика такая же, как в app.js)
+            let data = JSON.parse(localStorage.getItem('collusionData'));
+            if(!data) {
+                alert("Пожалуйста, сначала откройте главную страницу (index.html), чтобы инициализировать базу.");
+                return;
+            }
+
+            // Заполняем поля формы текущими данными
+            document.getElementById('adm-inst').value = data.settings.instagram;
+            document.getElementById('adm-phone').value = data.settings.phone;
+            document.getElementById('adm-email').value = data.settings.email;
+            
+            document.getElementById('adm-banner').value = data.settings.bannerBg;
+            document.getElementById('adm-bg-desktop').value = data.settings.bgDesktop;
+            document.getElementById('adm-bg-mobile').value = data.settings.bgMobile;
+
+            // Массивы видео конвертируем в строку через запятую для текстовых полей
+            document.getElementById('adm-vid-comm').value = data.videos.commercial.join(', ');
+            document.getElementById('adm-vid-music').value = data.videos.music.join(', ');
+            document.getElementById('adm-vid-life').value = data.videos.lifestyle.join(', ');
+            document.getElementById('adm-vid-art').value = data.videos.artists.join(', ');
+
+            // Сохранение
+            document.getElementById('save-btn').addEventListener('click', () => {
+                data.settings.instagram = document.getElementById('adm-inst').value;
+                data.settings.phone = document.getElementById('adm-phone').value;
+                data.settings.email = document.getElementById('adm-email').value;
+                
+                data.settings.bannerBg = document.getElementById('adm-banner').value;
+                data.settings.bgDesktop = document.getElementById('adm-bg-desktop').value;
+                data.settings.bgMobile = document.getElementById('adm-bg-mobile').value;
+
+                // Функция для превращения строки "ID1, ID2" обратно в чистый массив ["ID1", "ID2"]
+                const parseVids = (str) => str.split(',').map(s => s.trim()).filter(s => s !== "");
+
+                data.videos.commercial = parseVids(document.getElementById('adm-vid-comm').value);
+                data.videos.music = parseVids(document.getElementById('adm-vid-music').value);
+                data.videos.lifestyle = parseVids(document.getElementById('adm-vid-life').value);
+                data.videos.artists = parseVids(document.getElementById('adm-vid-art').value);
+
+                // Записываем обратно в localStorage
+                localStorage.setItem('collusionData', JSON.stringify(data));
+                
+                // Визуальный отклик
+                const btn = document.getElementById('save-btn');
+                btn.innerText = "Сохранено!";
+                btn.style.background = "#4CAF50";
+                btn.style.color = "white";
+                setTimeout(() => {
+                    btn.innerText = "Сохранить изменения";
+                    btn.style.background = "#fff";
+                    btn.style.color = "#000";
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>

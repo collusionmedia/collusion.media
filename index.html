@@ -1,80 +1,183 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collusion Media | Video Production</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Collusion Media</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Иконки -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 <body>
 
-    <header class="banner">
-        <div class="banner-top">
-            <select id="lang-switch" class="lang-switch">
-                <option value="ru">RU</option>
-                <option value="en">EN</option>
-                <option value="de">DE</option>
-                <option value="pl">PL</option>
-                <option value="uk">UK</option>
-            </select>
-        </div>
-        
-        <h1 class="main-title" data-i18n="portfolioTitle">PORTFOLIO</h1>
+<div class="glass">
 
-        <div class="banner-bottom">
-            <div class="contact-links">
-                <a href="#" id="link-instagram" target="_blank" class="contact-icon" title="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="#" id="link-phone" class="contact-icon" title="Copy Phone">
-                    <i class="fas fa-phone"></i>
-                </a>
-                <a href="#" id="link-email" class="contact-icon" title="Email Us">
-                    <i class="far fa-envelope"></i>
-                </a>
-            </div>
-            <a href="admin.html" class="admin-link"><i class="fas fa-cog"></i></a>
-        </div>
-    </header>
+<!-- ===== БАННЕР ===== -->
+<section class="banner">
+  <h1 id="title">Portfolio</h1>
 
-    <main class="content-wrapper glassmorphism">
-        
-        <section class="about-section">
-            <h2 data-i18n="aboutTitle">О Collusion Media</h2>
-            <p id="about-text" data-i18n="aboutText">
-                Новый видео продакшн, который работает над музыкальными, коммерческими и творческими проектами.
-            </p>
-        </section>
+  <!-- контакты -->
+  <div class="contacts">
+    <a href="https://instagram.com/collusion.media" target="_blank">
+      <i class="fab fa-instagram"></i>
+    </a>
 
-        <section class="portfolio-category">
-            <h3 data-i18n="catCommercial">Коммерческие работы</h3>
-            <div class="video-row" id="row-commercial"></div>
-        </section>
+    <a href="#" id="phone">
+      <i class="fas fa-phone"></i>
+    </a>
 
-        <section class="portfolio-category">
-            <h3 data-i18n="catMusic">Музыкальные клипы</h3>
-            <div class="video-row" id="row-music"></div>
-        </section>
+    <a href="mailto:collusion.media.work@gmail.com">
+      <i class="fas fa-envelope"></i>
+    </a>
+  </div>
 
-        <section class="portfolio-category">
-            <h3 data-i18n="catLifestyle">Лайфстайл</h3>
-            <div class="video-row" id="row-lifestyle"></div>
-        </section>
+  <!-- языки -->
+  <div class="lang">
+    <button data-lang="ru">RU</button>
+    <button data-lang="en">EN</button>
+    <button data-lang="de">DE</button>
+    <button data-lang="pl">PL</button>
+    <button data-lang="uk">UK</button>
+  </div>
+</section>
 
-        <section class="portfolio-category">
-            <h3 data-i18n="catArtists">Артисты</h3>
-            <div class="video-row" id="row-artists"></div>
-        </section>
+<!-- ===== КОНТЕНТ ===== -->
+<section class="content">
 
-    </main>
+  <h2 id="about-title">О Collusion Media</h2>
+  <p id="about-text">
+    Новый видео продакшн, который работает над музыкальными, коммерческими и творческими проектами.
+  </p>
 
-    <script src="app.js"></script>
+  <!-- СЕКЦИИ -->
+  <div class="section">
+    <h2 id="sec1">Коммерческие работы</h2>
+    <div class="row">
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/E1SuZz94gNg?rel=0&modestbranding=1" allowfullscreen></iframe>
+      </div>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/bmmAw1HqLoU?rel=0&modestbranding=1" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 id="sec2">Музыкальные клипы</h2>
+    <div class="row">
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/DXoOqDf8o3k?rel=0&modestbranding=1" allowfullscreen></iframe>
+      </div>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/oqls_8L9R28?rel=0&modestbranding=1" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 id="sec3">Лайфстайл</h2>
+    <div class="row"></div>
+  </div>
+
+  <div class="section">
+    <h2 id="sec4">Артисты</h2>
+    <div class="row"></div>
+  </div>
+
+</section>
+
+</div>
+
+<script>
+/* ===== ЯЗЫКИ ===== */
+
+const texts = {
+  ru: {
+    about: "О Collusion Media",
+    desc: "Новый видео продакшн, который работает над музыкальными, коммерческими и творческими проектами.",
+    s1: "Коммерческие работы",
+    s2: "Музыкальные клипы",
+    s3: "Лайфстайл",
+    s4: "Артисты"
+  },
+  en: {
+    about: "About Collusion Media",
+    desc: "A new video production working on music, commercial and creative projects.",
+    s1: "Commercial",
+    s2: "Music Videos",
+    s3: "Lifestyle",
+    s4: "Artists"
+  },
+  de: {
+    about: "Über Collusion Media",
+    desc: "Neue Videoproduktion für Musik, Werbung und kreative Projekte.",
+    s1: "Werbung",
+    s2: "Musikvideos",
+    s3: "Lifestyle",
+    s4: "Künstler"
+  },
+  pl: {
+    about: "O Collusion Media",
+    desc: "Nowa produkcja wideo zajmująca się projektami muzycznymi, komercyjnymi i kreatywnymi.",
+    s1: "Reklamy",
+    s2: "Klipy muzyczne",
+    s3: "Lifestyle",
+    s4: "Artyści"
+  },
+  uk: {
+    about: "Про Collusion Media",
+    desc: "Новий відеопродакшн для музичних, комерційних і творчих проєктів.",
+    s1: "Комерційні роботи",
+    s2: "Музичні кліпи",
+    s3: "Лайфстайл",
+    s4: "Артисти"
+  }
+};
+
+/* авто язык */
+function getLang(){
+  const saved = localStorage.getItem("lang");
+  if(saved) return saved;
+
+  const browser = navigator.language.slice(0,2);
+
+  if(browser === "uk") return "uk";
+  if(browser === "ru") return "ru";
+  if(browser === "pl") return "pl";
+  if(browser === "de") return "de";
+
+  return "en";
+}
+
+function applyLang(lang){
+  localStorage.setItem("lang", lang);
+
+  document.getElementById("about-title").innerText = texts[lang].about;
+  document.getElementById("about-text").innerText = texts[lang].desc;
+  document.getElementById("sec1").innerText = texts[lang].s1;
+  document.getElementById("sec2").innerText = texts[lang].s2;
+  document.getElementById("sec3").innerText = texts[lang].s3;
+  document.getElementById("sec4").innerText = texts[lang].s4;
+}
+
+/* кнопки */
+document.querySelectorAll(".lang button").forEach(btn=>{
+  btn.onclick = ()=> applyLang(btn.dataset.lang);
+});
+
+/* запуск */
+applyLang(getLang());
+
+/* телефон */
+document.getElementById("phone").onclick = ()=>{
+  navigator.clipboard.writeText("+48576388735");
+  alert("Скопировано");
+};
+</script>
+
 </body>
 </html>

@@ -1,179 +1,121 @@
-// ==========================================
-// БАЗОВЫЕ НАСТРОЙКИ И ДАННЫЕ ПО УМОЛЧАНИЮ
-// ==========================================
+@import url('https://fonts.googleapis.com/css2?family=Pobeda&display=swap');
 
-// Если в localStorage (памяти браузера) ещё ничего нет, используем этот шаблон.
-const defaultData = {
-    settings: {
-        bgDesktop: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=2000",
-        bgMobile: "https://images.unsplash.com/photo-1540655037529-dec98f5807ee?q=80&w=800",
-        bannerBg: "https://images.unsplash.com/photo-1620121478247-ec786ceb24c3?q=80&w=2000",
-        instagram: "https://instagram.com",
-        phone: "+1234567890",
-        email: "hello@collusion.media"
-    },
-    translations: {
-        ru: {
-            portfolioTitle: "ПОРТФОЛИО",
-            aboutTitle: "О Collusion Media",
-            aboutText: "Новый видео продакшн, который работает над музыкальными, коммерческими и творческими проектами.",
-            catCommercial: "Коммерческие работы",
-            catMusic: "Музыкальные клипы",
-            catLifestyle: "Лайфстайл",
-            catArtists: "Артисты"
-        },
-        en: {
-            portfolioTitle: "PORTFOLIO",
-            aboutTitle: "About Collusion Media",
-            aboutText: "A new video production company working on music, commercial, and creative projects.",
-            catCommercial: "Commercial Works",
-            catMusic: "Music Videos",
-            catLifestyle: "Lifestyle",
-            catArtists: "Artists"
-        },
-        uk: {
-            portfolioTitle: "ПОРТФОЛІО",
-            aboutTitle: "Про Collusion Media",
-            aboutText: "Новий відеопродакшн, який працює над музичними, комерційними та творчими проєктами.",
-            catCommercial: "Комерційні роботи",
-            catMusic: "Музичні кліпи",
-            catLifestyle: "Лайфстайл",
-            catArtists: "Артисти"
-        },
-        pl: {
-            portfolioTitle: "PORTFOLIO",
-            aboutTitle: "O Collusion Media",
-            aboutText: "Nowa produkcja wideo pracująca nad projektami muzycznymi, komercyjnymi i kreatywnymi.",
-            catCommercial: "Prace komercyjne",
-            catMusic: "Teledyski",
-            catLifestyle: "Lifestyle",
-            catArtists: "Artyści"
-        },
-        de: {
-            portfolioTitle: "PORTFOLIO",
-            aboutTitle: "Über Collusion Media",
-            aboutText: "Eine neue Videoproduktion, die an Musik-, Werbe- und Kreativprojekten arbeitet.",
-            catCommercial: "Kommerzielle Arbeiten",
-            catMusic: "Musikvideos",
-            catLifestyle: "Lifestyle",
-            catArtists: "Künstler"
-        }
-    },
-    videos: {
-        // Сюда вписываем только ID видео из YouTube (то, что идет после v=)
-        commercial: ["dQw4w9WgXcQ", "3JZ_D3ELwOQ"], 
-        music: ["L_jWHffIx5E"],
-        lifestyle: [],
-        artists: []
-    }
-};
-
-// Загружаем данные из LocalStorage или берём дефолтные
-let siteData = JSON.parse(localStorage.getItem('collusionData'));
-if (!siteData) {
-    siteData = defaultData;
-    localStorage.setItem('collusionData', JSON.stringify(siteData));
+body {
+  margin:0;
+  font-family:'Helvetica Neue', sans-serif;
+  color:white;
+  background:url('https://i.pinimg.com/736x/62/76/34/627634aab8908a7eaa90dce0a11d257d.jpg') center/cover;
 }
 
-// ==========================================
-// ЛОГИКА МУЛЬТИЯЗЫЧНОСТИ
-// ==========================================
-
-// Определяем язык пользователя
-let currentLang = localStorage.getItem('siteLang');
-if (!currentLang) {
-    // navigator.language возвращает что-то вроде 'ru-RU' или 'en-US', берем первые 2 буквы
-    const browserLang = navigator.language.slice(0, 2); 
-    const supported = ['ru', 'en', 'de', 'pl', 'uk'];
-    currentLang = supported.includes(browserLang) ? browserLang : 'en';
-    localStorage.setItem('siteLang', currentLang);
+@media(max-width:768px){
+  body{
+    background:url('https://i.pinimg.com/736x/42/f3/27/42f327d49db6f524859fd0d69f881e7b.jpg') center/cover;
+  }
 }
 
-// Устанавливаем select на нужный язык
-const langSwitch = document.getElementById('lang-switch');
-if(langSwitch) {
-    langSwitch.value = currentLang;
-    langSwitch.addEventListener('change', (e) => {
-        localStorage.setItem('siteLang', e.target.value);
-        window.location.reload(); // Перезагружаем страницу для применения перевода
-    });
+.glass{
+  backdrop-filter: blur(20px);
+  background: rgba(0,0,0,0.75);
 }
 
-// Функция для подстановки текста на страницу
-function applyTranslations() {
-    const dict = siteData.translations[currentLang];
-    
-    // Ищем все элементы с атрибутом data-i18n и меняем их текст
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (dict[key]) {
-            el.innerText = dict[key];
-        }
-    });
+/* ===== БАННЕР ===== */
+.banner{
+  height:65vh;
+  background:url('https://i.pinimg.com/1200x/74/86/1d/74861db5d76e756c6280e234c40cce77.jpg') center/cover;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
 }
 
-// ==========================================
-// ИНИЦИАЛИЗАЦИЯ И РЕНДЕР КОНТЕНТА
-// ==========================================
-
-function initSite() {
-    // 1. Применяем языки
-    applyTranslations();
-
-    // 2. Устанавливаем фоновые изображения через CSS-переменные
-    document.documentElement.style.setProperty('--bg-desktop', `url('${siteData.settings.bgDesktop}')`);
-    document.documentElement.style.setProperty('--bg-mobile', `url('${siteData.settings.bgMobile}')`);
-    document.documentElement.style.setProperty('--banner-img', `url('${siteData.settings.bannerBg}')`);
-
-    // 3. Настраиваем ссылки в баннере
-    document.getElementById('link-instagram').href = siteData.settings.instagram;
-    document.getElementById('link-email').href = `mailto:${siteData.settings.email}`;
-    
-    // Копирование телефона по клику
-    document.getElementById('link-phone').addEventListener('click', (e) => {
-        e.preventDefault();
-        navigator.clipboard.writeText(siteData.settings.phone);
-        alert(`Телефон скопирован: ${siteData.settings.phone}`); // Простое уведомление
-    });
-
-    // 4. Рендерим видео-карточки
-    renderVideos('commercial', 'row-commercial');
-    renderVideos('music', 'row-music');
-    renderVideos('lifestyle', 'row-lifestyle');
-    renderVideos('artists', 'row-artists');
+.banner h1{
+  font-family:'Pobeda';
+  font-size:90px;
+  letter-spacing:3px;
 }
 
-// Функция для создания YouTube iframe карточек
-function renderVideos(categoryKey, containerId) {
-    const container = document.getElementById(containerId);
-    if(!container) return;
-
-    const videoIds = siteData.videos[categoryKey];
-    container.innerHTML = ''; // Очищаем контейнер
-
-    if(videoIds.length === 0) {
-        // Если видео нет, можно скрыть всю категорию
-        container.parentElement.style.display = 'none';
-        return;
-    }
-
-    videoIds.forEach(id => {
-        const idTrimmed = id.trim();
-        if(!idTrimmed) return;
-
-        // Создаем карточку. modestbranding=1 и rel=0 убирают лишний брендинг YouTube
-        const card = document.createElement('div');
-        card.className = 'video-card';
-        card.innerHTML = `
-            <iframe 
-                src="https://www.youtube.com/embed/${idTrimmed}?rel=0&modestbranding=1" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
-        `;
-        container.appendChild(card);
-    });
+/* контакты */
+.contacts{
+  position:absolute;
+  right:20px;
+  bottom:20px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 
-// Запускаем сборку сайта после загрузки DOM
-document.addEventListener('DOMContentLoaded', initSite);
+.contacts a{
+  color:white;
+  font-size:20px;
+  transition:0.3s;
+}
+
+.contacts a:hover{
+  transform:scale(1.2);
+}
+
+/* языки */
+.lang{
+  position:absolute;
+  top:20px;
+  right:20px;
+}
+
+.lang button{
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.3);
+  color:white;
+  margin-left:5px;
+  cursor:pointer;
+}
+
+/* ===== КОНТЕНТ ===== */
+.content{
+  padding:40px;
+  margin-top:-80px;
+}
+
+h2{
+  margin-bottom:15px;
+  text-shadow:0 2px 10px black;
+}
+
+p{
+  max-width:600px;
+  margin-bottom:40px;
+}
+
+/* ===== ВИДЕО ===== */
+.row{
+  display:flex;
+  gap:25px;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+}
+
+.video{
+  width:720px;
+  height:405px;
+  flex:0 0 auto;
+  border-radius:10px;
+  overflow:hidden;
+  transition:0.3s;
+}
+
+.video iframe{
+  width:100%;
+  height:100%;
+}
+
+.video:hover{
+  transform:scale(1.05);
+}
+
+/* мобилка */
+@media(max-width:768px){
+  .banner h1{ font-size:42px; }
+  .video{
+    width:480px;
+    height:270px;
+  }
+}
